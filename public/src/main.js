@@ -4,7 +4,6 @@ import { RGBELoader } from '/node_modules/three/examples/jsm/loaders/RGBELoader.
 
 //Renderer does the job of rendering the graphics
 let renderer = new THREE.WebGLRenderer({
-
 	//Defines the canvas component in the DOM that will be used
 	canvas: document.querySelector('#background'),
   antialias: true,
@@ -30,6 +29,7 @@ const scene = new THREE.Scene();
 let cameraList = [];
 let camera;
 let mixer;
+let actions = {};
 
 const LoadGLTFByPath = (scene) => {
   return new Promise((resolve, reject) => {
@@ -41,10 +41,13 @@ const LoadGLTFByPath = (scene) => {
 
       scene.add(gltf.scene);
       mixer = new THREE.AnimationMixer(gltf.scene); // Create the AnimationMixer
-      const action = mixer.clipAction(gltf.animations.find(clip => clip.name === 'saluto_action')); // Find and play the animation
-      action.play();
+      gltf.animations.forEach((clip) => {
+				actions[clip.name] = mixer.clipAction(clip);
+			});
 
-
+      // Play the 'bake1_skeleton' animation
+      actions['bake1_skeleton'].play();
+			
       resolve();
     }, undefined, (error) => {
       reject(error);
@@ -113,5 +116,44 @@ function animate() {
 
 
 
-
+// Intersection Observer setup
+const sections = document.querySelectorAll('.section');
+const observerOptions = {
+	root: null,
+	rootMargin: '0px',
+	threshold: 0.5,
+};
     
+// Map each section index to an array of animation names
+const sectionToAnimationsMap = [
+	['bake1_skeleton'], // Animations for section 1
+	['bake2_rocket', 'bake2_skeleton'], // Animations for section 2
+	['action6'] // Animation for section 3
+];
+
+const observer = new IntersectionObserver((entries, observer) => {
+	entries.forEach(entry => {
+		if (entry.isIntersecting) {
+			const sectionIndex = Array.from(sections).indexOf(entry.target);
+			playAnimationForSection(sectionIndex);
+		}
+	});
+}, observerOptions);
+
+sections.forEach(section => {
+	observer.observe(section);
+});
+
+function playAnimationForSection(sectionIndex) {
+	const animationNames = sectionToAnimationsMap[sectionIndex];
+	if (animationNames) {
+		// Stop all current animations
+		Object.values(actions).forEach(action => action.stop());
+		// Play each animation for the current section
+		animationNames.forEach(name => {
+			if (actions[name]) {
+				actions[name].play();
+			}
+		});
+	}
+}

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3d curriculum</title>
@@ -21,16 +28,18 @@
         }
         
         h1 {
+            font-family: "Anton SC", sans-serif;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 5%;
 			position: absolute;
-            top: 5%;
+            top: 3%;
             left: 0;
             right: 0;
             z-index: 2; /* Ensure text is in front of canvas */
         }
         
         .section {
+            width: 57%;
             scroll-snap-align: start;
             padding: 20px;
             height: 100vh;
@@ -41,7 +50,11 @@
         }
 
         .text-left {
-            width: 57%;
+            margin-top: 20%;
+            font-size:2.5ch;
+            color: black;
+            font-family: "Roboto Mono", monospace;
+            font-optical-sizing: auto;
         }
 
 		#background {
@@ -52,6 +65,26 @@
             height: 100%;
             z-index: 1; /* Ensure canvas is behind text */
 			pointer-events: none;
+        }
+
+        .degree {
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            background-color: rgba(255, 166, 0, 0.315); /* Replace the alpha value (0.5) with your desired transparency */
+        }
+        .degree small {
+            display: block;
+            font-size: 14px;
+        }
+        .degree h2 {
+            margin: 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .degree p {
+            font-style: italic;
+            margin: 5px 0 0;
         }
     </style>
 	<script type="importmap">
@@ -68,15 +101,32 @@
     
     
     <div class="section">
-		<h1>White Title</h1>
+		<h1 style="color: #FFA500;">SIMONE CARGNIN</h1>
+        <h1 style="top: 9%;">MULTIFACETED TECH PROFESSIONAL</h1>
         <div class="text-left">
-            <p>This is some white text on the left of the page. Scroll down to see the snapping effect. aaaakkkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkaaaajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+            <p>I'm a skilled software developer with expertise in Python,
+                and web technologies, backed by a solid mathematical
+                background. My proficiency extends to robotics, electronics
+                and machine learning.
+                <br><br> I'm eager to apply these skills to
+                innovative projects in robotics engineering or pioneering
+                software solutions in emerging technology fields.</p>
         </div>
     </div>
     
     <div class="section">
+        <h1 style="font-size: xxx-large;">education</h1>
         <div class="text-left">
-            <p>Here is another section with white text on the left. Keep scrolling!</p>
+            <div class="degree">
+                <small>Bachelor's degree 2020 - 2023</small>
+                <h2>Applied Computer Science and Artificial Intelligence</h2>
+                <p>Sapienza University of Rome</p>
+            </div>
+            <div class="degree">
+                <small>Master degree 2023 - Current</small>
+                <h2>Artificial Intelligence and Robotics</h2>
+                <p>Sapienza University of Rome</p>
+            </div>
         </div>
     </div>
     
