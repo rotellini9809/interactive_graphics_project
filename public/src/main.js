@@ -41,6 +41,11 @@ const LoadGLTFByPath = (scene) => {
 
       scene.add(gltf.scene);
       mixer = new THREE.AnimationMixer(gltf.scene); // Create the AnimationMixer
+
+      gltf.scene.traverse((object) => {
+        if (object.isMesh) object.frustumCulled = false;
+      });
+
       gltf.animations.forEach((clip) => {
 				actions[clip.name] = mixer.clipAction(clip);
 			});
@@ -124,12 +129,15 @@ const observerOptions = {
 	threshold: 0.5,
 };
     
+
 // Map each section index to an array of animation names
 const sectionToAnimationsMap = [
-	['bake1_skeleton'], // Animations for section 1
-	['bake2_rocket', 'bake2_skeleton'], // Animations for section 2
-	['action6'] // Animation for section 3
+	['bake1_skeleton','camera1'], // Animations for section 1
+	['bake2_skeleton_camminata','camera2','windowAction','rocket_plume','partenza razzo','stella1_out_of_cam','stella2_out_of_cam','stella3_out_of_cam','spot_action'], // Animations for section 2
+	['rocket_flying','camera3','rocket_plume2','stella1_animation','stella2Action','stella3Action.001'] // Animation for section 3
 ];
+
+
 
 const observer = new IntersectionObserver((entries, observer) => {
 	entries.forEach(entry => {
