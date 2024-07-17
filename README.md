@@ -42,3 +42,7 @@ To get started with the project, follow these steps:
     ```
    *Note: The default port is 3000, but if it is already in use, the server may run on a different port. Check the terminal output for the correct port.*
 
+## 🎨 3D Models
+
+All 3D models in this project, except the astronaut, are created by me using Blender. You can find the .blend files in the `blender` folder within this repository.
+astronaut author: https://sketchfab.com/3d-models/cute-astronaut-816bd786fe8b4559a009de6a95582003
